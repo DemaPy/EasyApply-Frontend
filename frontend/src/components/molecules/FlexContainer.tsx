@@ -3,11 +3,12 @@ import { PropsWithChildren } from 'react'
 
 interface Props {
   className?: string
+  column?: boolean
 }
 
-export const FlexContainer = ({ children, className }: PropsWithChildren<Props>) => {
+export const FlexContainer = ({ children, className, column }: PropsWithChildren<Props>) => {
   return (
-    <div className={cn('flex items-center justify-between', className)}>
+    <div className={cn('flex items-center justify-between', {['flex-col items-stretch']: column} ,className)}>
       {children}
     </div>
   )

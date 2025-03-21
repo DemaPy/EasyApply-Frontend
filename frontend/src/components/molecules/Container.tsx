@@ -7,7 +7,7 @@ interface Props {
 
 export const Container = ({ children, className }: PropsWithChildren<Props>) => {
   return (
-    <div className={cn('p-4 gap-2 flex flex-col', className)}>
+    <div className={cn('p-3 gap-2 flex flex-col', className)}>
       {children}
     </div>
   )

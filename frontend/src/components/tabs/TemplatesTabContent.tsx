@@ -1,48 +1,48 @@
-import { Context as ContextType } from "@/types";
+import { Template as TemplateType } from "@/types";
 import {
   CreateButton,
   FlexContainer,
   ScrollableContainer,
   TabContentTitle,
 } from "../molecules";
-import { Context } from "./Context";
+import { Template } from "../organisms/Template";
 
-export const ContextTabContent = () => {
-  const contexts: ContextType[] = [
+export const TemplatesTabContent = () => {
+  const templates: TemplateType[] = [
     {
       id: "1",
-      title: "React Developer",
+      title: "Monix",
     },
     {
       id: "2",
-      title: "Backend Developer",
+      title: "Sonic",
     },
     {
       id: "3",
-      title: "Frontend Developer",
+      title: "Vintage",
     },
     {
       id: "4",
-      title: "Fullstack Developer",
+      title: "Modern",
     },
     {
       id: "5",
-      title: "Android Developer",
+      title: "Custom",
     },
   ];
 
   const onCreate = () => {
-    alert('Create context')
-  }
+    alert("Create template");
+  };
 
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
       <TabContentTitle onClick={() => console.log("view all")}>
-        Created context
+        Resume templates
       </TabContentTitle>
       <ScrollableContainer>
-        {contexts.map((context) => (
-          <Context key={context.id} context={context} />
+        {templates.map((resume) => (
+          <Template key={resume.id} template={resume} />
         ))}
       </ScrollableContainer>
       <CreateButton onClick={onCreate} />

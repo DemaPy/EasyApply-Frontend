@@ -1,6 +1,5 @@
 import {
   BodySection,
-  FooterSection,
   HeadingSection,
 } from "./components/templates";
 
@@ -9,7 +8,6 @@ export const App = () => {
     <main>
       <HeadingSection />
       <BodySection />
-      <FooterSection />
     </main>
   );
 };

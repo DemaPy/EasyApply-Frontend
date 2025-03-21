@@ -1,17 +1,19 @@
-import { Resume as ResumeType } from "@/types";
+import { Context as ContextType } from "@/types";
 import {
   CreateButton,
   FlexContainer,
   ScrollableContainer,
   TabContentTitle,
 } from "../molecules";
-import { Resume } from "./Resume";
+import { Context } from "../organisms/Context";
+import { useNavigate } from "react-router-dom";
 
-export const ResumesTabContent = () => {
-  const resumes: ResumeType[] = [
+export const ContextTabContent = () => {
+  const navigate = useNavigate()
+  const contexts: ContextType[] = [
     {
       id: "1",
-      title: "Serve soft frontend developer",
+      title: "React Developer",
     },
     {
       id: "2",
@@ -32,17 +34,17 @@ export const ResumesTabContent = () => {
   ];
 
   const onCreate = () => {
-    alert('Create resume')
-  }
+    navigate("/create/context");
+  };
 
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
       <TabContentTitle onClick={() => console.log("view all")}>
-        Generated resumes
+        Created context
       </TabContentTitle>
       <ScrollableContainer>
-        {resumes.map((resume) => (
-          <Resume key={resume.id} resume={resume} />
+        {contexts.map((context) => (
+          <Context key={context.id} context={context} />
         ))}
       </ScrollableContainer>
       <CreateButton onClick={onCreate} />

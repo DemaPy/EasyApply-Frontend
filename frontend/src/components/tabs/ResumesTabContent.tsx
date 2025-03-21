@@ -1,48 +1,50 @@
-import { Template as TemplateType } from "@/types";
+import { Resume as ResumeType } from "@/types";
 import {
   CreateButton,
   FlexContainer,
   ScrollableContainer,
   TabContentTitle,
 } from "../molecules";
-import { Template } from "./Template";
+import { Resume } from "../organisms/Resume";
+import { useNavigate } from "react-router-dom";
 
-export const TemplatesTabContent = () => {
-  const templates: TemplateType[] = [
+export const ResumesTabContent = () => {
+  const navigate = useNavigate();
+  const resumes: ResumeType[] = [
     {
       id: "1",
-      title: "Monix",
+      title: "Serve soft frontend developer",
     },
     {
       id: "2",
-      title: "Sonic",
+      title: "Backend Developer",
     },
     {
       id: "3",
-      title: "Vintage",
+      title: "Frontend Developer",
     },
     {
       id: "4",
-      title: "Modern",
+      title: "Fullstack Developer",
     },
     {
       id: "5",
-      title: "Custom",
+      title: "Android Developer",
     },
   ];
 
   const onCreate = () => {
-    alert("Create template");
+    navigate("/create/resume");
   };
 
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
       <TabContentTitle onClick={() => console.log("view all")}>
-        Resume templates
+        Generated resumes
       </TabContentTitle>
       <ScrollableContainer>
-        {templates.map((resume) => (
-          <Template key={resume.id} template={resume} />
+        {resumes.map((resume) => (
+          <Resume key={resume.id} resume={resume} />
         ))}
       </ScrollableContainer>
       <CreateButton onClick={onCreate} />

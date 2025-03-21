@@ -5,7 +5,6 @@ export const FooterSection = () => {
   return (
     <SectionWrapper className="bg-green-50">
       <Container>
-        Footer
       </Container>
     </SectionWrapper>
   );
