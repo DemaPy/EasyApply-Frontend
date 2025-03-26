@@ -7,18 +7,7 @@
     "48": "images/icon-48.png",
     "128": "images/icon-48.png"
   },
-  "content_scripts": [
-    {
-      "js": [
-        "content_scripts/init.js"
-      ],
-      "matches": [
-        "http://*.example.com/"
-      ]
-    }
-  ],
   "action": {
-    "default_popup": "./frontend/dist/index.html"
-  },
-  "permissions": ["scripting", "activeTab"]
+    "default_popup": "./dist/index.html"
+  }
 }

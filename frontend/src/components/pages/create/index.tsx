@@ -1,20 +1,40 @@
-import { Title } from "@/components/atoms";
 import {
   CreateButton,
   FlexContainer,
   ScrollableContainer,
 } from "@/components/molecules";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Section } from "./components";
 import { createRegister } from "./constance";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseFormReturn, useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
 import { createContext } from "@/api";
+import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
+  context: z
+    .string()
+    .min(2, {
+      message: "Name must be at least 2 characters.",
+    })
+    .max(30)
+    .optional(),
+  resume: z
+    .string()
+    .min(2, {
+      message: "Name must be at least 2 characters.",
+    })
+    .max(30)
+    .optional(),
   name: z
     .string()
     .min(2, {
@@ -59,10 +79,15 @@ export type FormType = UseFormReturn<
 >;
 
 export const Create = () => {
+  const navigate = useNavigate();
   const mutate = useMutation({
     mutationFn: createContext,
     onSuccess: (data) => {
+      navigate("/");
       console.log(data);
+    },
+    onError: (error) => {
+      console.error(error);
     },
   });
   const { type } = useParams<{ type: "context" | "resume" }>();
@@ -73,22 +98,41 @@ export const Create = () => {
   if (!type) return "Type not found";
 
   function onSubmit(values: z.infer<ContextSchema>) {
-    mutate.mutate(values);
+    const title = values.context!;
+    delete values.context;
+    mutate.mutate({ title, sections: values });
   }
 
   return (
     <FlexContainer column className="gap-4">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <FlexContainer>
-            <Title>Create {type}</Title>
-            <CreateButton type="submit" />
+          <FlexContainer className="gap-4" column>
+            <FlexContainer>
+              <FormField
+                control={form.control}
+                name={type}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        className="w-full text-xl!"
+                        placeholder={`Create ${type}`}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <CreateButton disabled={mutate.isPending} type="submit" />
+            </FlexContainer>
+            <ScrollableContainer>
+              {createRegister[type].map((section) => (
+                <Section key={section.id} section={section} form={form} />
+              ))}
+            </ScrollableContainer>
           </FlexContainer>
-          <ScrollableContainer>
-            {createRegister[type].map((section) => (
-              <Section key={section.id} section={section} form={form} />
-            ))}
-          </ScrollableContainer>
         </form>
       </Form>
     </FlexContainer>

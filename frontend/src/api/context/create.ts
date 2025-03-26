@@ -1,8 +1,9 @@
-import { ContextSchema } from "@/components/pages";
 import { api } from "../init";
-import { z } from "zod";
 
-export const createContext = async (payload: z.infer<ContextSchema>) => {
+export const createContext = async (payload: {
+  title: string;
+  sections: unknown;
+}) => {
   return await api({
     url: "/context",
     options: {
@@ -10,4 +11,8 @@ export const createContext = async (payload: z.infer<ContextSchema>) => {
       body: JSON.stringify(payload),
     },
   });
+};
+
+export const getAllContext = async () => {
+  return await api({ url: "/context" });
 };

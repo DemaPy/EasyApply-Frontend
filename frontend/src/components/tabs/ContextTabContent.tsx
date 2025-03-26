@@ -1,41 +1,34 @@
-import { Context as ContextType } from "@/types";
 import {
   CreateButton,
   FlexContainer,
   ScrollableContainer,
   TabContentTitle,
 } from "../molecules";
-import { Context } from "../organisms/Context";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getAllContext } from "@/api";
+import type { Context as ContextType } from "@/types";
+import { Context } from "../organisms";
 
 export const ContextTabContent = () => {
-  const navigate = useNavigate()
-  const contexts: ContextType[] = [
-    {
-      id: "1",
-      title: "React Developer",
-    },
-    {
-      id: "2",
-      title: "Backend Developer",
-    },
-    {
-      id: "3",
-      title: "Frontend Developer",
-    },
-    {
-      id: "4",
-      title: "Fullstack Developer",
-    },
-    {
-      id: "5",
-      title: "Android Developer",
-    },
-  ];
+  const navigate = useNavigate();
+  const { isLoading, data, error } = useQuery({
+    queryFn: getAllContext,
+    queryKey: ["all_context"],
+  });
 
   const onCreate = () => {
     navigate("/create/context");
   };
+
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    console.log(error);
+    return "Oooops... error";
+  }
 
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
@@ -43,7 +36,7 @@ export const ContextTabContent = () => {
         Created context
       </TabContentTitle>
       <ScrollableContainer>
-        {contexts.map((context) => (
+        {data?.map((context: ContextType) => (
           <Context key={context.id} context={context} />
         ))}
       </ScrollableContainer>
