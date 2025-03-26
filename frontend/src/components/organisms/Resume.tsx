@@ -9,7 +9,7 @@ export const Resume = ({ resume }: Props) => {
   return (
     <FlexContainer className="rounded-md bg-neutral-50 px-3 py-2">
       <ShortenTitle className="text-md" title={resume.title} options={{ limit: 18 }} />
-      <SeeMoreButton onClick={() => alert("See more")} />
+      <SeeMoreButton onClick={() => alert(JSON.stringify(resume))} />
     </FlexContainer>
   );
 };
