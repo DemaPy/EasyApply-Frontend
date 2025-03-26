@@ -8,17 +8,18 @@ import {
   FormItem,
   FormControl,
   FormMessage,
+  Form,
 } from "@/components/ui/form";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { Form, useNavigate, useParams } from "react-router-dom";
-import { createRegister } from "../../constance";
+import { useNavigate } from "react-router-dom";
 import { UseFormReturn, useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { createContext } from "@/api";
 import { ContextSchema, formSchema } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Section } from "../../components";
+import { contextSections } from "./sections";
 
 export type FormType = UseFormReturn<
   z.infer<ContextSchema>,
@@ -28,7 +29,6 @@ export type FormType = UseFormReturn<
 >;
 
 export const ContextCreate = () => {
-  const { type } = useParams<{ type: "context" }>();
   const navigate = useNavigate();
 
   const mutate = useMutation({
@@ -52,8 +52,6 @@ export const ContextCreate = () => {
     mutate.mutate({ title, sections: values });
   }
 
-  if (!type) return "Type not found";
-
   return (
     <FlexContainer column className="gap-4">
       <Form {...form}>
@@ -62,14 +60,14 @@ export const ContextCreate = () => {
             <FlexContainer>
               <FormField
                 control={form.control}
-                name={type}
+                name={"context"}
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <Input
                         {...field}
                         className="w-full text-xl!"
-                        placeholder={`Create ${type}`}
+                        placeholder={`Create context`}
                       />
                     </FormControl>
                     <FormMessage />
@@ -79,7 +77,7 @@ export const ContextCreate = () => {
               <CreateButton disabled={mutate.isPending} type="submit" />
             </FlexContainer>
             <ScrollableContainer>
-              {createRegister[type].map((section) => (
+              {contextSections.map((section) => (
                 <Section key={section.id} section={section} form={form} />
               ))}
             </ScrollableContainer>

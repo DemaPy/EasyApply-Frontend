@@ -14,6 +14,7 @@ const router = createHashRouter([
       },
       {
         path: "create/:type",
+        errorElement: <div>Ooops, unexpected error happened.</div>,
         element: (
           <CreateGuard>
             <Create />

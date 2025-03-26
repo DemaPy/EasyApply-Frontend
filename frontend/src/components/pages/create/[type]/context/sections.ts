@@ -1,6 +1,6 @@
-import { Section, SectionCreateTypes } from "@/types/section";
+import { Section } from "@/types";
 
-const contextSections: Section[] = [
+export const contextSections: Section[] = [
   {
     id: "1",
     title: "About me",
@@ -52,8 +52,3 @@ const contextSections: Section[] = [
     ],
   },
 ];
-
-export const createRegister: Record<SectionCreateTypes, Section[]> = {
-  context: contextSections,
-  resume: [],
-};

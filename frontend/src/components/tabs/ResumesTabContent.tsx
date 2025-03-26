@@ -7,31 +7,24 @@ import {
 } from "../molecules";
 import { Resume } from "../organisms/Resume";
 import { useNavigate } from "react-router-dom";
+import { getAllResumes } from "@/api";
+import { useQuery } from "@tanstack/react-query";
 
 export const ResumesTabContent = () => {
   const navigate = useNavigate();
-  const resumes: ResumeType[] = [
-    {
-      id: "1",
-      title: "Serve soft frontend developer",
-    },
-    {
-      id: "2",
-      title: "Backend Developer",
-    },
-    {
-      id: "3",
-      title: "Frontend Developer",
-    },
-    {
-      id: "4",
-      title: "Fullstack Developer",
-    },
-    {
-      id: "5",
-      title: "Android Developer",
-    },
-  ];
+  const { isLoading, data, error } = useQuery({
+    queryFn: getAllResumes,
+    queryKey: ["resumes"],
+  });
+
+  if (isLoading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    console.log(error);
+    return "Oooops... error";
+  }
 
   const onCreate = () => {
     navigate("/create/resume");
@@ -43,7 +36,7 @@ export const ResumesTabContent = () => {
         Generated resumes
       </TabContentTitle>
       <ScrollableContainer>
-        {resumes.map((resume) => (
+        {data.map((resume: ResumeType) => (
           <Resume key={resume.id} resume={resume} />
         ))}
       </ScrollableContainer>

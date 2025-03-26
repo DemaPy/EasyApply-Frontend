@@ -4,14 +4,14 @@ export const formSchema = z.object({
   context: z
     .string()
     .min(2, {
-      message: "Name must be at least 2 characters.",
+      message: "Title must be at least 2 characters.",
     })
     .max(30)
     .optional(),
   resume: z
     .string()
     .min(2, {
-      message: "Name must be at least 2 characters.",
+      message: "Resume must be at least 2 characters.",
     })
     .max(30)
     .optional(),
