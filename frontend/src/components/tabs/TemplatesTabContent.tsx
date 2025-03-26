@@ -1,6 +1,5 @@
 import { Template as TemplateType } from "@/types";
 import {
-  CreateButton,
   FlexContainer,
   ScrollableContainer,
   TabContentTitle,
@@ -31,10 +30,6 @@ export const TemplatesTabContent = () => {
     },
   ];
 
-  const onCreate = () => {
-    alert("Create template");
-  };
-
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
       <TabContentTitle onClick={() => console.log("view all")}>
@@ -45,7 +40,6 @@ export const TemplatesTabContent = () => {
           <Template key={resume.id} template={resume} />
         ))}
       </ScrollableContainer>
-      <CreateButton onClick={onCreate} />
     </FlexContainer>
   );
 };
