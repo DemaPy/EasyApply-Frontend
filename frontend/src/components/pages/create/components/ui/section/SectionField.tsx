@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { FormType } from "../../..";
+import { FormType } from "../../../[type]/context/ContextCreate";
 
 interface Props {
   form: FormType;

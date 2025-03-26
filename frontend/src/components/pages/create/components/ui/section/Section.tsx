@@ -2,7 +2,7 @@ import { Title } from "@/components/atoms";
 import { FlexContainer } from "@/components/molecules";
 import { Section as SectionType } from "@/types";
 import { SectionField } from "./SectionField";
-import { FormType } from "../../..";
+import { FormType } from "../../../[type]/context/ContextCreate";
 
 interface Props {
   form: FormType;
