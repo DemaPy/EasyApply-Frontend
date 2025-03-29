@@ -5,8 +5,10 @@ import {
   TabContentTitle,
 } from "../molecules";
 import { Template } from "../organisms/Template";
+import { useNavigate } from "react-router-dom";
 
 export const TemplatesTabContent = () => {
+  const navigate = useNavigate();
   const templates: TemplateType[] = [
     {
       id: "1",
@@ -30,12 +32,16 @@ export const TemplatesTabContent = () => {
     },
   ];
 
+  const handleViewAll = () => {
+    navigate('/viewAll/template')
+  }
+
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
-      <TabContentTitle onClick={() => console.log("view all")}>
+      <TabContentTitle onClick={handleViewAll}>
         Resume templates
       </TabContentTitle>
-      <ScrollableContainer>
+      <ScrollableContainer className="gap-2">
         {templates.map((resume) => (
           <Template key={resume.id} template={resume} />
         ))}

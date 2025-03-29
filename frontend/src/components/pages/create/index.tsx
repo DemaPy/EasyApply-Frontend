@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom";
 import { ContextCreate } from "./[type]/context/ContextCreate";
 import { ReactNode } from "react";
 import { ResumeCreate } from "./[type]/resume/ResumeCreate";
+import { FlexContainer } from "@/components/molecules";
+import { Title } from "@/components/atoms";
 
 type TypeParam = "context" | "resume";
 
@@ -17,5 +19,10 @@ export const Create = () => {
 
   const Component = createRegistry[type];
 
-  return <Component />;
+  return (
+    <FlexContainer column className="gap-2">
+      <Title>Create {type}</Title>
+      <Component />
+    </FlexContainer>
+  );
 };

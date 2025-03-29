@@ -30,12 +30,14 @@ export const ContextTabContent = () => {
     return "Oooops... error";
   }
 
+  const handleViewAll = () => {
+    navigate("/viewAll/context");
+  };
+
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
-      <TabContentTitle onClick={() => console.log("view all")}>
-        Created context
-      </TabContentTitle>
-      <ScrollableContainer>
+      <TabContentTitle onClick={handleViewAll}>Created context</TabContentTitle>
+      <ScrollableContainer className="gap-2">
         {data?.map((context: ContextType) => (
           <Context key={context.id} context={context} />
         ))}

@@ -2,10 +2,6 @@ interface Req {
   url: string;
   options?: RequestInit;
 }
-
-// const BASE_URL_DEV = "http://localhost:3000";
-const BASE_URL_PROD = "https://easyapply-backend-production.up.railway.app";
-
 export const api = async ({ url, options }: Req) => {
   const _options: RequestInit =
     options && options.method === "POST"
@@ -17,7 +13,7 @@ export const api = async ({ url, options }: Req) => {
           ...options,
           method: "GET",
         };
-  const response = await fetch(BASE_URL_PROD + url, _options);
+  const response = await fetch(import.meta.env.VITE_BASE_URL_PROD + url, _options);
   if (!response.ok) {
     throw new Error("Api error");
   }

@@ -1,11 +1,19 @@
-import { PropsWithChildren } from 'react'
-import { FlexContainer } from './FlexContainer'
+import { HTMLProps, PropsWithChildren } from "react";
+import { FlexContainer } from "./FlexContainer";
+import clsx from "clsx";
 
-
-export const ScrollableContainer = ({ children }: PropsWithChildren) => {
+export const ScrollableContainer = ({
+  children,
+  className,
+}: PropsWithChildren<Pick<HTMLProps<HTMLDivElement>, "className">>) => {
   return (
-    <FlexContainer className='h-[360px] overflow-y-auto rounded-md flex-col items-stretch gap-4 justify-start'>
-        {children}
+    <FlexContainer
+      className={clsx(
+        "h-[360px] overflow-y-auto rounded-md flex-col items-stretch gap-4 justify-start",
+        className
+      )}
+    >
+      {children}
     </FlexContainer>
-  )
-}
+  );
+};

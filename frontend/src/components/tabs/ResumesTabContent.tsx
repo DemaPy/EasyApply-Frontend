@@ -30,13 +30,17 @@ export const ResumesTabContent = () => {
     navigate("/create/resume");
   };
 
+  const handleViewAll = () => {
+    navigate('/viewAll/resume')
+  }
+
   return (
     <FlexContainer className="flex-col gap-2 items-stretch">
-      <TabContentTitle onClick={() => console.log("view all")}>
+      <TabContentTitle onClick={handleViewAll}>
         Generated resumes
       </TabContentTitle>
-      <ScrollableContainer>
-        {data.map((resume: ResumeType) => (
+      <ScrollableContainer className="gap-2">
+        {data?.map((resume: ResumeType) => (
           <Resume key={resume.id} resume={resume} />
         ))}
       </ScrollableContainer>

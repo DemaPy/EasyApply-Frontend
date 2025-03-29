@@ -20,6 +20,9 @@ import { ResumeSchema, resumeSchema } from "./schema";
 import { Input } from "@/components/ui/input";
 import { SelectContext } from "./components/SelectContext";
 import { SelectTemplate } from "./components/SelectTemplate";
+import { JobDescription } from "./components/JobDescription";
+import toast from "react-hot-toast";
+import DOMPurify from "dompurify";
 
 export type FormType = UseFormReturn<
   z.infer<ResumeSchema>,
@@ -44,16 +47,20 @@ export const ResumeCreate = () => {
       form.reset();
     },
     onError: (error) => {
+      toast(error.message);
       console.error(error);
     },
   });
 
   function onSubmit(values: z.infer<ResumeSchema>) {
     const title = values.resume;
+    const clean = DOMPurify.sanitize("<b>hello there</b>");
+
     mutate.mutate({
       title,
       context: values.context,
       template: values.template,
+      jobDescription: clean,
     });
   }
 
@@ -86,6 +93,7 @@ export const ResumeCreate = () => {
             <ScrollableContainer>
               <SelectContext form={form} />
               <SelectTemplate form={form} />
+              <JobDescription form={form} />
             </ScrollableContainer>
           </FlexContainer>
         </form>
