@@ -3,9 +3,9 @@ import { redirect, useParams } from "react-router-dom";
 
 const ALLOWED_TYPES = ["resume", "context"];
 
-const CreateGuard = ({ children }: PropsWithChildren) => {
+export const CreateGuard = ({ children }: PropsWithChildren) => {
   const params = useParams<{ type: string }>();
-    
+
   if (params.type && !ALLOWED_TYPES.includes(params.type)) {
     redirect("/");
     return;
@@ -13,5 +13,3 @@ const CreateGuard = ({ children }: PropsWithChildren) => {
 
   return children;
 };
-
-export default CreateGuard;

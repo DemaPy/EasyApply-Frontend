@@ -1,9 +1,7 @@
 import { App } from "@/App";
-import { Create, Home } from "@/components/pages";
-import CreateGuard from "@/components/pages/create/components/guard";
-import { Credits } from "@/components/pages/credits";
+import { Create, Home, Credits, Billing, ViewAll } from "@/components/pages";
+import { CreateGuard } from "@/components/pages/create/components/guard";
 import { HomePageError } from "@/components/pages/home/Error";
-import { ViewAll } from "@/components/pages/viewAll";
 import { ViewGuard } from "@/components/pages/viewAll/components/guard";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 
@@ -20,6 +18,10 @@ const router = createHashRouter([
       {
         path: "/credits",
         element: <Credits />,
+      },
+      {
+        path: "/billing",
+        element: <Billing />,
       },
       {
         path: "/viewAll/:type",

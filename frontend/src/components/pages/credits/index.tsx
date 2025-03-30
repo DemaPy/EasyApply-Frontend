@@ -1,10 +1,7 @@
 import { Title } from "@/components/atoms";
 import { CreditsCard } from "./components/CreditsCard";
-import { buyCredits } from "@/api/credits";
 
 export const Credits = () => {
-  const handleClick = (pack: string) => () => buyCredits(pack);
-
   return (
     <div className="flex flex-col gap-4">
       <div>
@@ -15,9 +12,16 @@ export const Credits = () => {
         </Title>
       </div>
       <div className="flex flex-col gap-2">
-        <CreditsCard price="9" title="99" onClick={handleClick("small")} />
-        <CreditsCard price="16" title="199" onClick={handleClick("medium")} />
-        <CreditsCard price="26" title="299" onClick={handleClick("max")} />
+        <CreditsCard
+          price="6"
+          title="Small pack - 100"
+          url={import.meta.env.VITE_STRIPE_PAYMENT_LINK_SMALL_PACK}
+        />
+        <CreditsCard
+          price="9"
+          title="Large pack - 250"
+          url={import.meta.env.VITE_STRIPE_PAYMENT_LINK_MEDIUM_PACK}
+        />
       </div>
     </div>
   );
