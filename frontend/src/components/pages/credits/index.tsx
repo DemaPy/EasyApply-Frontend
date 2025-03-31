@@ -1,5 +1,6 @@
 import { Title } from "@/components/atoms";
-import { CreditsCard } from "./components/CreditsCard";
+import { SmallPack } from "./components/SmallPack";
+import { MediumPack } from "./components/MediumPack";
 
 export const Credits = () => {
   return (
@@ -12,16 +13,8 @@ export const Credits = () => {
         </Title>
       </div>
       <div className="flex flex-col gap-2">
-        <CreditsCard
-          price="6"
-          title="Small pack - 100"
-          url={import.meta.env.VITE_STRIPE_PAYMENT_LINK_SMALL_PACK}
-        />
-        <CreditsCard
-          price="9"
-          title="Large pack - 250"
-          url={import.meta.env.VITE_STRIPE_PAYMENT_LINK_MEDIUM_PACK}
-        />
+        <SmallPack />
+        <MediumPack />
       </div>
     </div>
   );

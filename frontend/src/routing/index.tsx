@@ -1,4 +1,5 @@
 import { App } from "@/App";
+import { Error } from "@/Error";
 import { Create, Home, Credits, Billing, ViewAll } from "@/components/pages";
 import { CreateGuard } from "@/components/pages/create/components/guard";
 import { HomePageError } from "@/components/pages/home/Error";
@@ -9,6 +10,7 @@ const router = createHashRouter([
   {
     path: "/",
     Component: App,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -20,7 +22,7 @@ const router = createHashRouter([
         element: <Credits />,
       },
       {
-        path: "/billing",
+        path: "/billing/:type",
         element: <Billing />,
       },
       {

@@ -1,3 +1,5 @@
+import { ApiResponse } from "@/types";
+
 interface Req {
   url: string;
   options?: RequestInit;
@@ -13,9 +15,11 @@ export const api = async ({ url, options }: Req) => {
           ...options,
           method: "GET",
         };
-  const response = await fetch(import.meta.env.VITE_BASE_URL_PROD + url, _options);
+  const response = await fetch(import.meta.env.VITE_BASE_URL + url, _options);
   if (!response.ok) {
-    throw new Error("Api error");
+    const json: ApiResponse<null> = await response.json();
+    const message = json?.message ?? "Api error";
+    throw new Error(message);
   }
   if (response.status >= 500) {
     throw new Error("Server error");
