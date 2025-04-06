@@ -1,4 +1,3 @@
-import { Resume } from "@/types";
 import { api } from "../init";
 
 interface Payload {
@@ -7,29 +6,6 @@ interface Payload {
   template: string;
   jobDescription: string;
 }
-
-export const resumes: Resume[] = [
-  {
-    id: "1",
-    title: "Serve soft frontend developer",
-  },
-  {
-    id: "2",
-    title: "Backend Developer",
-  },
-  {
-    id: "3",
-    title: "Frontend Developer",
-  },
-  {
-    id: "4",
-    title: "Fullstack Developer",
-  },
-  {
-    id: "5",
-    title: "Android Developer",
-  },
-];
 
 export const createResume = async (payload: Payload) => {
   return await api({
